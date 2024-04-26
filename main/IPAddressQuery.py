@@ -10,6 +10,8 @@ import argparse
 import json
 import random
 
+version = 2.3
+
 
 def get_parameter():
     parser = argparse.ArgumentParser(description='查看IP的归属地')
@@ -58,7 +60,7 @@ def main():
     args = get_parameter()
 
     if args.version:
-        print("IPAddressQuery version  2.1")
+        print(f"IPAddressQuery version  {version}")
         return
 
     if args.ipaddr:
