@@ -42,6 +42,7 @@ def get_json(ipaddr):
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0"
     ]
+
     headers = {
         'User-Agent': random.choice(user_agents),
         'Connection': 'keep-alive'
