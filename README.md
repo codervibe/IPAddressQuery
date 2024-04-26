@@ -23,8 +23,9 @@ usage: IPAddressQuery [-h] [-a IPADDR] [-v]
 查看IP的归属地
 
 options:
-  -h, --help  show this help message and exit
-  -a IPADDR   输入查询IP
-  -v          Optional parameters
+  -h, --help     show this help message and exit
+  -a IPADDR      输入查询IP
+  -f FILE        从文件中读取IP列表进行查询
+  -v, --version  显示脚本的版本信息
 
 ~~~
