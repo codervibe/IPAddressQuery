@@ -17,8 +17,8 @@ def get_parameter():
     parser = argparse.ArgumentParser(description='查看IP的归属地')
     parser.add_argument('-a', dest='ipaddr', type=str, default='', help='输入查询IP')
     parser.add_argument('-f', dest='file', type=str, default='', help='从文件中读取IP列表进行查询')
-    parser.add_argument('-v', '--version', action='store_true', help='显示脚本的版本信息')
     parser.add_argument('--random-agent', action='store_true', help='启用随机User-Agent')
+    parser.add_argument('-v', '--version', action='store_true', help='显示脚本的版本信息')
     args = parser.parse_args()
 
     # 如果没有提供参数，则打印帮助信息
