@@ -1,22 +1,13 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
-# -*- 作者： codervibe -*-
-# -*- 时间: 18 ：46 -*-
-# -*- 获取 IP 地址定位 -*-
-# -*-  1.9  -*-
-
 import requests
 import argparse
 import json
 import random
-
 
 def get_parameter():
     parser = argparse.ArgumentParser(description='查看IP的归属地')
     parser.add_argument('-a', dest='ipaddr', type=str, default='', help='输入查询IP')
     parser.add_argument('-f', dest='file', type=str, default='', help='从文件中读取IP列表进行查询')
     parser.add_argument('-v', '--version', action='store_true', help='IPAddressQuery version 1.9.0')
-    # parser.add_argument('-q', '--quiet', action='store_true', help='安静模式，只输出归属地')
     args = parser.parse_args()
 
     if args.ipaddr and args.file:
@@ -26,7 +17,6 @@ def get_parameter():
         parser.error("请指定要查询的IP地址或文件。")
 
     return args
-
 
 def get_json(ipaddr):
     url = 'http://ip-api.com/json/{}?lang=zh-CN'.format(ipaddr)
@@ -42,8 +32,8 @@ def get_json(ipaddr):
     }
 
     try:
-        r = requests.get(url, timeout=15, headers=headers)  # 设置超时时间为15秒
-        r.raise_for_status()  # 如果请求失败，会抛出异常
+        r = requests.get(url, timeout=15, headers=headers)
+        r.raise_for_status()
         r.close()
         result = r.content.decode()
         return result
@@ -51,6 +41,21 @@ def get_json(ipaddr):
         print("网络请求异常:", e)
         return None
 
+def print_ip_details(ip_json, args):
+    ip_query = ip_json['query']
+    ip_country = ip_json['country']
+    ip_city = ip_json['city']
+    ip_regionName = ip_json['regionName']
+    ip_timezone = ip_json['timezone']
+    ip_lon = ip_json['lon']
+    ip_lat = ip_json['lat']
+    ip_isp = ip_json['isp']
+
+    print(f"查询的IP：{ip_query}\n归属地为: {ip_country}, {ip_regionName}, {ip_city}\n时区: {ip_timezone}")
+    print(f"经度: {ip_lon}\t纬度: {ip_lat}")
+    print(f"互联网服务提供商: {ip_isp}")
+    if args.version:
+        print(json.dumps(ip_json, indent=4))
 
 def main():
     args = get_parameter()
@@ -72,21 +77,7 @@ def main():
             continue
 
         ip_json = json.loads(ip_str)
-        ip_query = ip_json['query']
-        ip_country = ip_json['country']
-        ip_city = ip_json['city']
-        ip_regionName = ip_json['regionName']
-        ip_timezone = ip_json['timezone']
-        ip_lon = ip_json['lon']
-        ip_lat = ip_json['lat']
-        ip_isp = ip_json['isp']
-
-        print(f"查询的IP：{ip_query}\n归属地为: {ip_country}, {ip_regionName}, {ip_city}\n时区: {ip_timezone}")
-        print(f"经度: {ip_lon}\t纬度: {ip_lat}")
-        print(f"互联网服务提供商: {ip_isp}")
-        if args.version:
-            print(json.dumps(ip_json, indent=4))
-
+        print_ip_details(ip_json, args)
 
 if __name__ == '__main__':
     main()
