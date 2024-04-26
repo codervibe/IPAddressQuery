@@ -12,7 +12,6 @@ options:
 
 
 ~~~
-
 ### 下载和使用 
 ~~~
 git clone https://github.com/codervibe/IPAddressQuery
@@ -51,4 +50,13 @@ options:
   -a IPADDR      输入查询IP
   -f FILE        从文件中读取IP列表进行查询
   -v, --version  显示脚本的版本信息
+~~~
+### exe 使用方法
+~~~powershell
+IPAddressQuery.exe -a  114.114.114.114
+查询的IP：114.114.114.114
+归属地为: 中国, 山东省, 潍坊市
+时区: Asia/Shanghai
+经度: 119.162	纬度: 36.7069
+互联网服务提供商: China Unicom Shandong Province network
 ~~~
