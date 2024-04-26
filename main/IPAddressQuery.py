@@ -1,9 +1,17 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# -*- 作者： codervibe -*-
+# -*- 时间: 18 ：46 -*-
+# -*- 获取 IP 地址定位 -*-
+# -*-  2.5.2  -*-
+
 import requests
 import argparse
 import json
 import random
 
-version = "2.4.1"
+version = "2.5.2"
+
 
 def get_parameter():
     parser = argparse.ArgumentParser(description='查看IP的归属地')
@@ -20,11 +28,12 @@ def get_parameter():
 
     return args
 
-def get_json(ipaddr, use_random_agent=False): # 修改get_json函数以接受一个新参数
+
+def get_json(ipaddr, use_random_agent=False):  # 修改get_json函数以接受一个新参数
     url = 'http://ip-api.com/json/{}?lang=zh-CN'.format(ipaddr)
     headers = {'Connection': 'keep-alive'}
 
-    if use_random_agent: # 根据参数确定是否使用随机User-Agent
+    if use_random_agent:  # 根据参数确定是否使用随机User-Agent
         user_agents = [
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
@@ -47,6 +56,7 @@ def get_json(ipaddr, use_random_agent=False): # 修改get_json函数以接受一
         print("网络请求异常:", e)
         return None
 
+
 def main():
     args = get_parameter()
 
@@ -65,7 +75,7 @@ def main():
             return
 
     for ipaddr in ip_list:
-        ip_str = get_json(ipaddr, use_random_agent=args.random_agent) # 传递参数到get_json函数
+        ip_str = get_json(ipaddr, use_random_agent=args.random_agent)  # 传递参数到get_json函数
         if ip_str is None:
             print(f"获取 IP {ipaddr} 归属地信息失败，请检查网络连接或稍后重试。")
             continue
@@ -87,6 +97,7 @@ def main():
 
         if args.version:
             print(json.dumps(ip_json, indent=4))
+
 
 if __name__ == '__main__':
     main()
