@@ -5,11 +5,10 @@
 # -*- 获取某个城市的天气 -*-
 # -*-  1.9  -*-
 
-
 import requests
 import argparse
 import json
-
+import random
 
 def get_parameter():
     parser = argparse.ArgumentParser(description='查看IP的归属地')
@@ -27,8 +26,14 @@ def get_parameter():
 
 def get_json(ipaddr):
     url = 'http://ip-api.com/json/{}?lang=zh-CN'.format(ipaddr)
+    user_agents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
+    ]
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0',
+        'User-Agent': random.choice(user_agents),
         'Connection': 'keep-alive'
     }
 
