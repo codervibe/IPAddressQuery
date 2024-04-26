@@ -3,7 +3,7 @@
 # -*- 作者： codervibe -*-
 # -*- 时间: 18 ：46 -*-
 # -*- 获取 IP 地址定位 -*-
-# -*-  2.3  -*-
+# -*-  2.4  -*-
 
 import requests
 import argparse

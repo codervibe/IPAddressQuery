@@ -29,7 +29,7 @@ IPAddressQuery -a 114.114.114.11
 * 运行效果
 ~~~shell
 IPAddressQuery -a 69.154.123.56
-查询的IP：69.154.123.56
+查询的IP: 69.154.123.56
 归属地为: 美国, 阿肯色州, 费耶特维尔
 时区: America/Chicago
 经度: -94.1523	纬度: 36.0613
@@ -62,5 +62,4 @@ IPAddressQuery -a 69.154.123.56
 经度: -94.1523	纬度: 36.0613
 互联网服务提供商: AT&T Services, Inc.
 谷歌地图:  https://www.google.com/maps/place/36.0613+-94.1523
-
 ~~~
