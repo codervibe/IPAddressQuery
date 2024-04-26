@@ -92,6 +92,8 @@ def main():
         print(f"查询的IP：{ip_query}\n归属地为: {ip_country}, {ip_regionName}, {ip_city}\n时区: {ip_timezone}")
         print(f"经度: {ip_lon}\t纬度: {ip_lat}")
         print(f"互联网服务提供商: {ip_isp}")
+        print(f"https://www.google.com/maps/place/{ip_lat}+{ip_lon}")
+
         if args.version:
             print(json.dumps(ip_json, indent=4))
 
