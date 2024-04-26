@@ -38,7 +38,7 @@ def get_json(ipaddr):
     }
 
     try:
-        r = requests.get(url, timeout=15, headers=headers)
+        r = requests.get(url, timeout=30, headers=headers)  # 设置超时时间为15秒
         r.raise_for_status()  # 如果请求失败，会抛出异常
         r.close()
         result = r.content.decode()
