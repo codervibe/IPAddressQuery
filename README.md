@@ -28,12 +28,14 @@ IPAddressQuery -a 114.114.114.11
 ~~~
 * 运行效果
 ~~~shell
-IPAddressQuery -a 114.114.114.114
-查询的IP: 114.114.114.114
-归属地为: 中国, 山东省, 潍坊市
-时区: Asia/Shanghai
-经度: 119.162	纬度: 36.7069
-互联网服务提供商: China Unicom Shandong Province network
+IPAddressQuery -a 69.154.123.56
+查询的IP：69.154.123.56
+归属地为: 美国, 阿肯色州, 费耶特维尔
+时区: America/Chicago
+经度: -94.1523	纬度: 36.0613
+互联网服务提供商: AT&T Services, Inc.
+谷歌地图:  https://www.google.com/maps/place/36.0613+-94.1523
+
 ~~~
 * 支持 proxychains4 代理 查询
 ~~~shell
@@ -53,10 +55,12 @@ options:
 ~~~
 ### exe 使用方法
 ~~~powershell
-IPAddressQuery.exe -a  114.114.114.114
-查询的IP：114.114.114.114
-归属地为: 中国, 山东省, 潍坊市
-时区: Asia/Shanghai
-经度: 119.162	纬度: 36.7069
-互联网服务提供商: China Unicom Shandong Province network
+IPAddressQuery -a 69.154.123.56
+查询的IP：69.154.123.56
+归属地为: 美国, 阿肯色州, 费耶特维尔
+时区: America/Chicago
+经度: -94.1523	纬度: 36.0613
+互联网服务提供商: AT&T Services, Inc.
+谷歌地图:  https://www.google.com/maps/place/36.0613+-94.1523
+
 ~~~
