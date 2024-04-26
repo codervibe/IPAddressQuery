@@ -37,15 +37,24 @@ def get_json(ipaddr):
         'Connection': 'keep-alive'
     }
 
-    r = requests.get(url, timeout=15, headers=headers)
-    r.close()
-    result = r.content.decode()
-    return result
+    try:
+        r = requests.get(url, timeout=15, headers=headers)
+        r.raise_for_status()  # 如果请求失败，会抛出异常
+        r.close()
+        result = r.content.decode()
+        return result
+    except requests.RequestException as e:
+        print("网络请求异常:", e)
+        return None
 
 
 def main():
     ipaddr = get_parameter()
     ip_str = get_json(ipaddr)
+    if ip_str is None:
+        print("获取 IP 归属地信息失败，请检查网络连接或稍后重试。")
+        return
+
     ip_json = json.loads(ip_str)
     # print(ip_json)
     # 国家
