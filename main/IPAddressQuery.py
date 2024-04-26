@@ -10,7 +10,7 @@ import argparse
 import json
 import random
 
-version = 2.3
+version = "2.4.0"
 
 
 def get_parameter():
