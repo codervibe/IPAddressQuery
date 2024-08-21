@@ -114,7 +114,7 @@ def main():
         else:
             ip_query = ip_json['query']
             ip_message = ip_json['message']
-            print(f"查询的IP：{ip_query}\n归属地为: {ip_message} 也就是一个私有地址")
+            print(f"查询的IP：{ip_query}\n归属地为: {ip_message}")
 
         if args.version:
             print(json.dumps(ip_json, indent=4))
