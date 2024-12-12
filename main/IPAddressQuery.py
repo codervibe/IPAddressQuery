@@ -26,6 +26,7 @@ USER_AGENTS = [
 
 # 定义脚本版本号
 version = "3.0.0"
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
