@@ -2,14 +2,18 @@
 ~~~shell
 PS D:\python\Python_project\IPAddressQuery\main> python .\IPAddressQuery.py  -h
 
+usage: IPAddressQuery.py [-h] [-a IPADDR] [-f FILE] [-r] [-v] [-u]
+
 查看IP的归属地
 
 options:
-  -h, --help      show this help message and exit
-  -a IPADDR       输入查询IP
-  -f FILE         从文件中读取IP列表进行查询
-  --random-agent  启用随机User-Agent
-  -v, --version   显示脚本的版本信息
+  -h, --help          show this help message and exit
+  -a IPADDR           输入查询IP
+  -f FILE             从文件中读取IP列表进行查询
+  -r, --random-agent  启用随机User-Agent
+  -v, --version       显示脚本的版本信息
+  -u, --update        更新脚本
+
 
 
 ~~~
