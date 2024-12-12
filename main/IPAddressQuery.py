@@ -23,7 +23,7 @@ USER_AGENTS = [
 ]
 
 # 定义脚本版本号
-version = "2.5.2"
+version = "2.6.2"
 
 def get_parameter():
     """
