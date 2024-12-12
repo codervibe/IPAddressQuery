@@ -9,7 +9,8 @@ import requests
 import argparse
 import json
 import random
-
+import logging
+import subprocess
 # 将User-Agent集合定义为一个配置项
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
@@ -23,11 +24,11 @@ USER_AGENTS = [
 ]
 
 # 定义脚本版本号
-version = "2.6.2"
-
+version = "2.5.2"
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 def get_parameter():
     """
-    解析命令行参数，包括IP地址、文件路径、是否使用随机User-Agent和显示版本信息
+    解析命令行参数，包括IP地址、文件路径、是否使用随机User-Agent、显示版本信息和更新脚本
     :return: 返回解析后的参数对象
     """
     parser = argparse.ArgumentParser(description='查看IP的归属地')
@@ -35,10 +36,11 @@ def get_parameter():
     parser.add_argument('-f', dest='file', type=str, default='', help='从文件中读取IP列表进行查询')
     parser.add_argument('-r','--random-agent', action='store_true', help='启用随机User-Agent')
     parser.add_argument('-v', '--version', action='store_true', help='显示脚本的版本信息')
+    parser.add_argument('-u', '--update', action='store_true', help='更新脚本')
     args = parser.parse_args()
 
     # 检查参数并打印帮助信息
-    if not args.ipaddr and not args.file and not args.version:
+    if not args.ipaddr and not args.file and not args.version and not args.update:
         parser.print_help()
         parser.exit()
 
@@ -79,11 +81,29 @@ def parse_json(ip_str):
         print("JSON解析失败，请检查返回的数据格式。")
         return None
 
+def update_script():
+    """
+    更新本地仓库到最新版本。
+
+    使用 `git pull` 命令从远程仓库拉取最新的代码，并记录日志。
+    如果更新过程中出现错误，记录错误日志。
+    """
+    try:
+        result = subprocess.run(['git', 'pull'], check=True, capture_output=True, text=True)
+        logging.info(result.stdout)
+    except subprocess.CalledProcessError as e:
+        logging.error(f"更新失败: {e.stderr}")
+
+
 def main():
     """
     主函数，处理命令行参数，读取IP地址，发送请求并解析响应
     """
     args = get_parameter()
+
+    if args.update:
+        update_script()
+        return
 
     if args.version:
         print(f"IPAddressQuery version  {version}")
