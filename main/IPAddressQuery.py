@@ -11,6 +11,7 @@ import json
 import random
 import logging
 import subprocess
+
 # 将User-Agent集合定义为一个配置项
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36",
@@ -26,6 +27,8 @@ USER_AGENTS = [
 # 定义脚本版本号
 version = "2.5.2"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
 def get_parameter():
     """
     解析命令行参数，包括IP地址、文件路径、是否使用随机User-Agent、显示版本信息和更新脚本
@@ -34,7 +37,7 @@ def get_parameter():
     parser = argparse.ArgumentParser(description='查看IP的归属地')
     parser.add_argument('-a', dest='ipaddr', type=str, default='', help='输入查询IP')
     parser.add_argument('-f', dest='file', type=str, default='', help='从文件中读取IP列表进行查询')
-    parser.add_argument('-r','--random-agent', action='store_true', help='启用随机User-Agent')
+    parser.add_argument('-r', '--random-agent', action='store_true', help='启用随机User-Agent')
     parser.add_argument('-v', '--version', action='store_true', help='显示脚本的版本信息')
     parser.add_argument('-u', '--update', action='store_true', help='更新脚本')
     args = parser.parse_args()
@@ -45,6 +48,7 @@ def get_parameter():
         parser.exit()
 
     return args
+
 
 def get_json(ipaddr, use_random_agent=False):
     """
@@ -68,6 +72,7 @@ def get_json(ipaddr, use_random_agent=False):
         print("网络请求异常:", e)
         return None
 
+
 def parse_json(ip_str):
     """
     解析JSON字符串并返回相关信息，增加异常处理
@@ -81,6 +86,7 @@ def parse_json(ip_str):
         print("JSON解析失败，请检查返回的数据格式。")
         return None
 
+
 def update_script():
     """
     更新本地仓库到最新版本。
@@ -90,9 +96,11 @@ def update_script():
     """
     try:
         result = subprocess.run(['git', 'pull'], check=True, capture_output=True, text=True)
-        logging.info(result.stdout)
+        logging.info("更新成功: %s", result.stdout)
     except subprocess.CalledProcessError as e:
-        logging.error(f"更新失败: {e.stderr}")
+        logging.error("更新失败: %s", e.stderr)
+    except FileNotFoundError:
+        logging.error("Git 命令未找到，请确保已安装 Git 并将其添加到系统路径中。")
 
 
 def main():
