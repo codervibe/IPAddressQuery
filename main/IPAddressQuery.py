@@ -22,14 +22,18 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0"
 ]
 
+# 定义脚本版本号
 version = "2.5.2"
 
-
 def get_parameter():
+    """
+    解析命令行参数，包括IP地址、文件路径、是否使用随机User-Agent和显示版本信息
+    :return: 返回解析后的参数对象
+    """
     parser = argparse.ArgumentParser(description='查看IP的归属地')
     parser.add_argument('-a', dest='ipaddr', type=str, default='', help='输入查询IP')
     parser.add_argument('-f', dest='file', type=str, default='', help='从文件中读取IP列表进行查询')
-    parser.add_argument('--random-agent', action='store_true', help='启用随机User-Agent')
+    parser.add_argument('-r','--random-agent', action='store_true', help='启用随机User-Agent')
     parser.add_argument('-v', '--version', action='store_true', help='显示脚本的版本信息')
     args = parser.parse_args()
 
@@ -40,8 +44,13 @@ def get_parameter():
 
     return args
 
-
 def get_json(ipaddr, use_random_agent=False):
+    """
+    发送HTTP请求获取IP地址的JSON信息
+    :param ipaddr: 需要查询的IP地址
+    :param use_random_agent: 是否使用随机User-Agent
+    :return: 返回请求结果的JSON字符串或None
+    """
     url = 'http://ip-api.com/json/{}?lang=zh-CN'.format(ipaddr)
     headers = {'Connection': 'keep-alive'}
 
@@ -57,9 +66,12 @@ def get_json(ipaddr, use_random_agent=False):
         print("网络请求异常:", e)
         return None
 
-
 def parse_json(ip_str):
-    """解析JSON字符串并返回相关信息，增加异常处理"""
+    """
+    解析JSON字符串并返回相关信息，增加异常处理
+    :param ip_str: JSON格式的字符串
+    :return: 返回解析后的JSON对象或None
+    """
     try:
         ip_json = json.loads(ip_str)
         return ip_json
@@ -67,8 +79,10 @@ def parse_json(ip_str):
         print("JSON解析失败，请检查返回的数据格式。")
         return None
 
-
 def main():
+    """
+    主函数，处理命令行参数，读取IP地址，发送请求并解析响应
+    """
     args = get_parameter()
 
     if args.version:
